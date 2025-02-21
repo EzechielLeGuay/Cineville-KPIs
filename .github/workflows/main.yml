@@ -1,9 +1,9 @@
-  name: Daily Lighthouse Report
+name: Daily Lighthouse Report
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Exécute tous les jours à 6h UTC
-  workflow_dispatch:
+    - cron: '0 6 * * *'  # Exécute tous les jours à 6h UTC
+  workflow_dispatch:  # Cela permet de déclencher manuellement le workflow
 
 jobs:
   lighthouse:
@@ -18,9 +18,10 @@ jobs:
       - name: Run Lighthouse
         run: lighthouse https://www.cineville.nl --quiet --chrome-flags="--headless" --output=json --output-path=report.json
 
-
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
           name: Lighthouse-Report
           path: report.json
+
+        
